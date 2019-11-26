@@ -1,0 +1,42 @@
+<div class="row pt-5">
+    <div class="col-md-6 mx-auto">
+        <div class="card text-center">
+            <h3 class="card-header">LogIn</h3>
+            <div class="card-body">
+                <form #signInForm="ngForm" (ngSubmit)="signInForm.submitted && onSubmit(signInForm)" >
+                    <div class="form-group"><!--Email-->
+                        <label for="email" class="control-label">E-mail</label>
+                        <input type="email" class="form-control" id="email" name="email"  #email="ngModel" required  [pattern]="emailRegex" 
+                        [(ngModel)]="model.email" [ngClass]="{'invalid-textbox': signInForm.submitted && !email.valid}">
+                        <div *ngIf="signInForm.submitted && email.errors">
+                            <label for="" *ngIf="email.errors.pattern" class="invalid-message">!Incorrect format</label>
+                            <label for="" *ngIf="email.errors.required" class="invalid-message">!can Not be empty</label>
+                        </div>
+
+                    </div>
+                    <div class="form-group"><!--Password-->
+                        <label for="password" class="control-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" #password="ngModel" required minlength="4"
+                        [(ngModel)]="model.password" [ngClass]="{'invalid-textbox': signInForm.submitted && !password.valid}">
+                        <div *ngIf="signInForm.submitted && password.errors">
+                            <label for="" *ngIf="password.errors.required"> !Can not be empty</label>
+                            <label for="" *ngIf="password.errors.minlength" >!At least 4 characters</label>
+
+
+                        </div>
+
+                    </div>
+                    <div class="form-group"><!--Login form-->
+                        <button class="btn btn-primary float-right">LogIn</button>
+
+                    </div>
+
+                </form>
+                <div *ngIf="showMessage"> <!--ShowMessage-->
+                    <label for="" class="alert"> {{showMessage}} </label>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
